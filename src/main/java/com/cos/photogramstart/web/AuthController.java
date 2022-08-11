@@ -32,7 +32,7 @@ public class AuthController {
 	
 	
 	
-	@GetMapping("/auth/signinininin")
+	@GetMapping("/auth/signin")
 	public String signinForm() {
 		return "auth/signin";
 	}
