@@ -6,7 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
+import com.cos.photogramstart.handler.ex.CustomException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
+import com.cos.photogramstart.web.dto.user.UserProfileDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,6 +18,19 @@ public class UserService {
 	
 	private final UserRepository userRepository;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Transactional(readOnly=true)
+	public UserProfileDto 회원프로필(int pageUserId, int principalId) {
+		UserProfileDto userProfileDto = new UserProfileDto();
+		// SELECT * FROM image WHERE userId = :userId;
+		User userEntity = userRepository.findById(pageUserId).orElseThrow(()->{
+			throw new CustomException("Id를 찾을 수 없습니다.");
+		});
+		userProfileDto.setImageCount(userEntity.getImages().size());
+		userProfileDto.setUser(userEntity);
+		userProfileDto.setPageOwnerState(pageUserId == principalId);
+		return 	userProfileDto;
+	}
 	@Transactional
 	public User 회원수정(int id, User user) {
 		//1.영속화
