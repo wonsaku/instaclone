@@ -79,6 +79,11 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>ch.simas.qlrm</groupId>
+			<artifactId>qlrm</artifactId>
+			<version>1.7.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

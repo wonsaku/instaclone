@@ -41,6 +41,7 @@ public class ImageController {
 			System.out.println("이미지가 첨부되지 않았습니다.");
 			throw new CustomValidationException("이미지가 첨부되지 않았습니다.", null);
 		}
+		
 		imageService.사진업로드(imageUploadDto, principalDetails);
 		System.out.println("????????????????????????");
 		return "redirect:/user/" + principalDetails.getUser().getId();

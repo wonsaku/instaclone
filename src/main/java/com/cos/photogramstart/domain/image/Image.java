@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 
 import com.cos.photogramstart.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,6 +29,7 @@ public class Image {
 	private String caption; //comment
 	private String postImageUrl; // 사진을 전송받아서 그 사진을 서버 특정 경로에 저장- db에 그 저장된 경로를 insert
 	
+	@JsonIgnoreProperties({"images"})
 	@JoinColumn(name="userId")
 	@ManyToOne
 	private User user; //db에는 이렇게 객체로 저장은 안되고, 그래서 fk 형태로 저장되어야 함)
